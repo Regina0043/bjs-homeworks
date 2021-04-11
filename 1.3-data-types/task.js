@@ -2,6 +2,11 @@
 function calculateTotalMortgage(percent, contribution, amount, date) {
     // код для задачи №1 писать здесь
     // return totalAmount;
+    console.log(percent);
+    console.log(contribution);
+    console.log(amount);
+    console.log(date);
+
     let today = new Date();
 
     let numPercent = percent / 100;
@@ -20,6 +25,21 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     date = Number(date);
     today = Number(today);
     totalAmount = Number(totalAmount);
+
+
+    if(percent === String || percent < 0 || percent === 0){
+        return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
+    }
+
+    else if (contribution === String || contribution < 0){
+        return `Параметр "Первоначальный взнос" содержит неправильное значение ${contribution}`;
+    }
+
+    else if (amount === String || amount < 0 || amount === 0){
+        return `Параметр "Сумма кредита" содержит непраильное значение ${amount}`;
+    }
+
+
 
     return totalAmount;
 }
