@@ -12,8 +12,8 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let numPercent = percent / 100;
 
     let s = amount - contribution; //тело кредита
-	let p = numPercent / 12; //1/12 процентной ставки
-	let n = date.getMonth() - today.getMonth() + (12 * (date.getFullYear() - today.getFullYear()));//количество месяцев
+    let p = numPercent / 12; //1/12 процентной ставки
+    let n = date.getMonth() - today.getMonth() + (12 * (date.getFullYear() - today.getFullYear()));//количество месяцев
     
     let result = (s * (p + p / (((1 + p)**n) - 1))) * n;
 
