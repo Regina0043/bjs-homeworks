@@ -27,15 +27,15 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     totalAmount = Number(totalAmount);
 
 
-    if(percent === String || percent < 0 || percent === 0){
+    if(typeof percent === 'undefind' || percent <= 0){
         return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
     }
 
-    else if (contribution === String || contribution < 0){
+    else if (typeof contribution === 'undefind' || contribution < 0){
         return `Параметр "Первоначальный взнос" содержит неправильное значение ${contribution}`;
     }
 
-    else if (amount === String || amount < 0 || amount === 0){
+    else if (typeof amount === 'undefind' || amount <= 0){
         return `Параметр "Сумма кредита" содержит непраильное значение ${amount}`;
     }
 
@@ -49,7 +49,7 @@ function getGreeting(name) {
     // return greeting;
     let greeting = `Привет, мир! Меня зовут ${name}.`;
 
-    if(name === ''){
+    if( name === '' || typeof name === 'undefind' || typeof name === null){
         greeting = 'Привет, мир! Меня зовут Аноним.';
     }
 
