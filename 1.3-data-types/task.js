@@ -19,13 +19,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
     let totalAmount = result.toFixed(2);
 
-    percent = Number(percent);
-    contribution = Number(contribution);
-    amount = Number(amount);
-    date = Number(date);
-    today = Number(today);
-    totalAmount = Number(totalAmount);
+    let thisYear = today.getFullYear();
+    let lastYear = date.getFullYear();
 
+    totalAmount = Number(totalAmount);
 
     if(typeof percent === 'undefind' || percent <= 0){
         return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
@@ -37,6 +34,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
     else if (typeof amount === 'undefind' || amount <= 0){
         return `Параметр "Сумма кредита" содержит непраильное значение ${amount}`;
+    }
+
+    else if (lastYear < thisYear){
+         return `Параметр "Дата завершения оплаты кредита" содержит неправильное значение ${date}`;
     }
 
 
