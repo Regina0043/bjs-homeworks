@@ -43,7 +43,7 @@ function checkBirthday(birthday) {
     let inputDate = birthday.split('-');
     let dayOfBirth = new Date (inputDate[0], inputDate[1] - 1, inputDate[2]);
     let majority = (31536000000 * 18) + (86400000 * 5);
-    // умножаю год в миллисекундах на 18 и прибавляю 4 високосных дня в миллисекндах
+    // умножаю год в миллисекундах на 18 и прибавляю 5 високосных дней в миллисекндах
 
    	let result = now.getTime() - dayOfBirth.getTime();
 
