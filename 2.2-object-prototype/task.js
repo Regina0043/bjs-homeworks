@@ -3,13 +3,13 @@ String.prototype.isPalindrome = function(){
 	let palindrome = this.split('').reverse().join('').trim().toLowerCase().replace(/\s/gi, '');
 	let str = this.split('').join('').trim().toLowerCase().replace(/\s/gi, '');
 
-	if (palindrome === str){
-		return true;
-	}
-
-	else if (palindrome === '' || palindrome !== str){
+	 if (palindrome === '' || palindrome !== str){
 	 return false;
 	}
+
+    return palindrome === str;
+    
+
 
 };
 
@@ -26,10 +26,10 @@ function getAverageMark(marks) {
     	let sum = 0;
     	for (let i = 0; i < marks.length; i++){
     		sum += marks[i];
-    		average = sum / marks.length;
-    		averageMark = Math.round(average);
-
     	}
+
+        average = sum / marks.length;
+        averageMark = Math.round(average);
 
     	return averageMark;
     }
@@ -51,9 +51,6 @@ function checkBirthday(birthday) {
     	verdict = false;
     }
 
-    else if (result >= majority){
-    	verdict = true;
-    }
 
-    return verdict;
+    return result >= majority;
 }
