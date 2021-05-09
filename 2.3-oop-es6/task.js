@@ -11,7 +11,7 @@ class PrintEditionItem{
 	}
 
 	fix(){
-		 return this.state * 1.5;
+		 this.state * 1.5;
 	}
 
 	
@@ -21,7 +21,7 @@ class PrintEditionItem{
 			 this._state = 0;
 		}
 
-		else if (arg < 100){
+		else if (arg > 100){
 			 this._state = 100;
 		}
 
@@ -238,34 +238,26 @@ class StudentLog{
 			let average;
 
 			for (let mark in this){
-				if(typeof this[mark] === 'object'){
-					for (let i = 0; i < this[mark].length; i++){
-						sumMark += this[mark][i];
-						average = sumMark / this[mark].length;
-						
-					}
-				
-					totalAverage = average/(Object.keys(this).length - 1);
-				
+				if(Array.isArray(this[mark])){
+					sumMark += this.getAverageBySubject(mark);
+					totalAverage = sumMark / (Object.keys(this).length - 1);
 				}
-
 			}
 
 			return totalAverage;
-		}
-
 	}
+}
 
 
 	const log = new StudentLog('Роман Беглов');
 
 	console.log(log.getName());
 
-	log.addGrade(3, 'algebra');
+	log.addGrade(2, 'algebra');
 	log.addGrade(5, 'algebra');
 
-	log.addGrade(5,'history');
-	log.addGrade(5, 'history');
+	log.addGrade(4,'history');
+	log.addGrade(2, 'history');
 
 	console.log(log.getAverageBySubject('algebra'));
 	console.log(log.getAverageBySubject('history'));
