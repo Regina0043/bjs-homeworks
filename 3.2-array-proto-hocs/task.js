@@ -58,24 +58,25 @@ getTotalDamage();
 
 function memorize(fn, limit){
 	const memory = [];
-	const obj = {};
 	return (...args) =>{
 		const mem = memory.find(item => compareArrays(item.args, [...args]));
+		//console.log(mem);
+		console.log(memory);
 		if(mem){
 			return mem.result;
 		}
-			memory.push(obj);
-			obj.args = [...args];
-			obj.result = fn(...args);
-			
 
-			const range = limit - 1;
+		const obj = {};
+		obj.args = [...args];
+		obj.result = fn(...args);
+		memory.push(obj);
 
-			if(memory.length > range){
-				memory.splice(range, memory.length - limit);
-			}
-			console.log(memory);
-			return obj.result;
+		const range = limit - 1;
+
+		if(memory.length > range){
+			memory.splice(range, memory.length - limit);
+		}
+		return obj.result;
 	}
 
 }	
@@ -84,6 +85,7 @@ function memorize(fn, limit){
 const resultFunction = memorize((a,b) => a + b, 3);
 resultFunction(3, 4);
 resultFunction(2, 4);
+resultFunction(3, 4);
 
 const mMux = memorize((a,b) => a*b, 10);
 mMux(3,4);
