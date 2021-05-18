@@ -3,53 +3,32 @@
 console.clear();
 const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
 function getNames(){
-	const container = [];
-	weapons.map(item => {
-		container.push(item.name);
-	});
-	console.log(container);
-	return container;
+	return weapons.map(item => item.name);
 }
 
 getNames();
 
 function getCountReliableWeapons(value){
-	const reliableWeapons = weapons.filter(item => item.durability > value);
-	console.log(reliableWeapons.length);
-	return reliableWeapons.length;
+	return weapons.filter(item => item.durability > value).length;
 }
 
 getCountReliableWeapons(300);
 
 function hasReliableWeapons(value){
-	console.log(weapons.some(item => item.initDurability > value));
 	return weapons.some(item => item.initDurability > value);
 }
 
 hasReliableWeapons(300);
 
 function getReliableWeaponsNames(value){
-	const container = [];
-	weapons.some(item => {
-		if(item.initDurability > value){
-			container.push(item.name);
-		}
-		
-	});
-	console.log(container);
-	return container;
+	return weapons.filter(item => item.initDurability > value).map(item => item.name);
 }
 
 getReliableWeaponsNames(300);
 
 function getTotalDamage(){
-	let sum = 0;
-	weapons.some(item => {
-		sum += item.attack;
-		console.log(item);
-	});
-	console.log(sum);
-	return sum;
+	return weapons.reduce((sum, item) => sum + item.attack , 0);
+
 }
 
 getTotalDamage();
@@ -60,8 +39,6 @@ function memorize(fn, limit){
 	const memory = [];
 	return (...args) =>{
 		const mem = memory.find(item => compareArrays(item.args, [...args]));
-		//console.log(mem);
-		console.log(memory);
 		if(mem){
 			return mem.result;
 		}
@@ -74,7 +51,7 @@ function memorize(fn, limit){
 		const range = limit - 1;
 
 		if(memory.length > range){
-			memory.splice(range, memory.length - limit);
+			memory.splice(range);
 		}
 		return obj.result;
 	}
