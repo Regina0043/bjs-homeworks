@@ -1,5 +1,4 @@
-const date = new Date()
-const dateNow = date.getHours()+ ':'+('0' + (date.getMinutes())).slice(-2);
+
 console.log(typeof(dateNow));
 class AlarmClock{
     constructor(){
@@ -35,21 +34,26 @@ class AlarmClock{
     }
 
     getCurrentFormattedTime(){
+        const date = new Date()
+        const dateNow = date.getHours()+ ':'+('0' + (date.getMinutes())).slice(-2);
         return dateNow;
     }
 
     start(){ 
-        function checkClock(alarm){
+        const checkClock = (alarm) =>{
+            const date = new Date()
+            const dateNow = date.getHours()+ ':'+('0' + (date.getMinutes())).slice(-2);
             if(alarm.time === dateNow){
                 return alarm.callback();
             }
         }
 
         if (this.timerId === null){
-         setInterval(() =>{
-               const id = this.alarmCollection.reduce(item => {
-                this.timerId = checkClock(item)});
-        }, 5000);
+         this.timerId = setInterval((() => {
+            this.alarmCollection.forEach(item => {
+                checkClock(item);
+               })
+        }), 5000);
         
         }
     }
@@ -76,7 +80,7 @@ class AlarmClock{
 
 const call = new AlarmClock();
 
-call.addClock('22:30', () => console.log('Пора вставать'), 1);
+call.addClock('23:05', () => console.log('Пора вставать'), 1);
 call.addClock('09:01', () => console.log('Хватит спать!'), 2);
 call.addClock('09:01', () => console.log('Хватит спать!'), 3);
 call.removeClock(3);
@@ -85,3 +89,4 @@ call.removeClock(3);
 call.getCurrentFormattedTime();
 call.printAlarms();
 call.start();
+console.log(call);
