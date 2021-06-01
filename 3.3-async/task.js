@@ -21,16 +21,15 @@ class AlarmClock{
     }
 
     removeClock(id){
-        this.alarmCollection.find(item =>{
-            if (item.id === id){
-                this.alarmCollection.splice(this.alarmCollection.indexOf(item));
-                return true + 'Удаление успешно совершено';
-            }
+       const newAlarms = this.alarmCollection.filter(item => item.id !== id);
+       if(newAlarms){
+        this.alarmCollection = newAlarms;
+        return true + '' + 'Удаление успешно совершено';
+       }
 
-            else{
-                return false + 'Удаление не удалось совершить';
-            }
-        })
+       else if (!newAlarms){
+        return false + '' + 'Удаление не удалось совершить';
+       }
     }
 
     getCurrentFormattedTime(){
@@ -41,9 +40,7 @@ class AlarmClock{
 
     start(){ 
         const checkClock = (alarm) =>{
-            const date = new Date()
-            const dateNow = date.getHours()+ ':'+('0' + (date.getMinutes())).slice(-2);
-            if(alarm.time === dateNow){
+            if(alarm.time === this.getCurrentFormattedTime()){
                 return alarm.callback();
             }
         }
@@ -80,7 +77,7 @@ class AlarmClock{
 
 const call = new AlarmClock();
 
-call.addClock('23:05', () => console.log('Пора вставать'), 1);
+call.addClock('16:19', () => console.log('Пора вставать'), 1);
 call.addClock('09:01', () => console.log('Хватит спать!'), 2);
 call.addClock('09:01', () => console.log('Хватит спать!'), 3);
 call.removeClock(3);
